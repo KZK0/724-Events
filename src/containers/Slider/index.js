@@ -13,7 +13,7 @@ const Slider = () => {
       setIndex((prevIndex) => (prevIndex < (data?.focus?.length || 0) - 1 ? prevIndex + 1 : 0));
     }, 5000);
 
-    return () => clearInterval(interval); // Nettoyer l'intervalle lors du démontage du composant
+    return () => clearInterval(interval); // Nettoyer l'intervalle du composant
   }, [index, data?.focus]);
 
   return (
