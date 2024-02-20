@@ -13,27 +13,12 @@ const EventList = () => {
   const { data, error } = useData();
   const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
+
   const filteredEvents = (
-    (!type
-      ? data?.events
-      : data?.events) || []
-  ).filter((event, index) => {
-
-    if (
-      (currentPage - 1) * PER_PAGE <= index &&
-      PER_PAGE * currentPage > index
-    ) {
-      if (!type) {
-        return true;
-      }
-      if (event.type === type.toLowerCase()) {
-        return true;
-      }
+    (!type ? data?.events : data?.events.filter(event => event.type === type.toLowerCase())) || []
+  ).filter((_, index) => (currentPage - 1) * PER_PAGE <= index && index < PER_PAGE * currentPage);
 
 
-    }
-    return false;
-  });
   const changeType = (evtType) => {
     setCurrentPage(1);
     setType(evtType);
